@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<app>
+	<id>zoopy</id>
+	<type>skin</type>
+	<media>video</media>
+	<name>Zoopy</name>
+	<description>Tune in to bite-sized videos of the latest news, sports and entertainment. All made for mobile, so your phone will love it. Welcome to Zoopy - The World in 90 Seconds.</description>
+	<thumb>http://www.zoopy.com/img/boxee.png</thumb>
+	<email>info@zoopy.com</email>
+	<copyright>Zoopy</copyright>
+	<platform>all</platform>
+	<repository>http://dir.boxee.tv/apps</repository>
+	<version>1.3</version>
+	<minversion>0.9.20</minversion>
+	<startWindow>zoopy</startWindow>
+</app>

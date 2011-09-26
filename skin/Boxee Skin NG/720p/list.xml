@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<window id="14000" type="window">
+	<defaultcontrol always="true">120</defaultcontrol>
+	<controls>
+		<control type="image">
+			<width>1280</width>
+			<height>720</height>
+			<texture>bg.jpg</texture>
+		</control>
+		<control type="image">
+			<width>275</width>
+			<height>76</height>
+			<posx>52</posx>
+			<posy>52</posy>
+			<texture>logo.png</texture>
+		</control>
+		<control type="button" id="130">
+			<onright>120</onright>
+			<enable>!Container(200).isLoading</enable>
+			<posx>52</posx>
+			<posy>148</posy>
+			<width>275</width>
+			<height>66</height>
+			<texturenofocus>all.png</texturenofocus>
+			<texturefocus>all_over.png</texturefocus>
+			<onclick lang="python"><![CDATA[
+mc.GetActiveWindow().GetList(120).SetContentURL("rss://www.zoopy.com/feed.rss?boxee")
+]]></onclick>
+		</control>
+		<control type="group">
+			<enable>!Container(120).isLoading</enable>
+			<posx>52</posx>
+			<posy>234</posy>
+			<control type="button" id="131">
+				<onright>120</onright>
+				<width>275</width>
+				<height>66</height>
+				<texturenofocus>news.png</texturenofocus>
+				<texturefocus>news_over.png</texturefocus>
+				<onclick lang="python"><![CDATA[
+mc.GetActiveWindow().GetList(120).SetContentURL("rss://www.zoopy.com/feed.rss?boxee&category=news")
+]]></onclick>
+			</control>
+			<control type="button" id="132">
+				<onright>120</onright>
+				<posy>66</posy>
+				<width>275</width>
+				<height>66</height>
+				<texturenofocus>sports.png</texturenofocus>
+				<texturefocus>sports_over.png</texturefocus>
+				<onclick lang="python"><![CDATA[
+mc.GetActiveWindow().GetList(120).SetContentURL("rss://www.zoopy.com/feed.rss?boxee&category=sport")
+]]></onclick>
+			</control>
+			<control type="button" id="133">
+				<onright>120</onright>
+				<posy>132</posy>
+				<width>275</width>
+				<height>66</height>
+				<texturenofocus>entertainment.png</texturenofocus>
+				<texturefocus>entertainment_over.png</texturefocus>
+				<onclick lang="python"><![CDATA[
+mc.GetActiveWindow().GetList(120).SetContentURL("rss://www.zoopy.com/feed.rss?boxee&category=entertainment")
+]]></onclick>
+			</control>
+		</control>
+		<control type="button" id="134">
+			<onright>120</onright>
+			<enable>!Container(120).isLoading</enable>
+			<posx>52</posx>
+			<posy>452</posy>
+			<width>275</width>
+			<height>66</height>
+			<texturenofocus>search.png</texturenofocus>
+			<texturefocus>search_over.png</texturefocus>
+			<onclick lang="python"><![CDATA[
+query = mc.ShowDialogKeyboard("Search Zoopy", "", False);
+mc.GetActiveWindow().GetList(120).SetContentURL("rss://www.zoopy.com/feed.rss?boxee&query=" + query)
+]]></onclick>
+		</control>
+		<control type="image">
+			<posx>366</posx>
+			<posy>52</posy>
+			<width>861</width>
+			<height>604</height>
+			<texture>content_bg.png</texture>
+		</control>
+		<control type="list" id="120">
+			<onleft>130</onleft>
+			<posx>385</posx>
+			<posy>67</posy>
+			<width>826</width>
+			<height>574</height>
+			<orientation>vertical</orientation>
+			<content type="url" url="rss://www.zoopy.com/feed.rss?boxee">
+				<onclick lang="python"><![CDATA[
+
+list = mc.GetActiveWindow().GetList(120)
+index = list.GetFocusedItem()
+
+last_list_item = list.GetItem(index)
+
+params = mc.Parameters()
+params["thumb"] = last_list_item.GetThumbnail()
+params["title"] = last_list_item.GetLabel()
+params["description"] = last_list_item.GetDescription()
+params["date"] = last_list_item.GetDate()
+mc.GetApp().ActivateWindow(14001, params)
+
+]]></onclick>
+			</content>
+			<itemlayout width="826" height="130">
+				<control type="image">
+					<posx>0</posx>
+					<posy>0</posy>
+					<width>826</width>
+					<height>130</height>
+					<texture>list-normal.png</texture>
+				</control>
+				<control type="image">
+					<posx>15</posx>
+					<posy>20</posy>
+					<width>160</width>
+					<height>90</height>
+					<info>ListItem.Icon</info>
+				</control>
+				<control type="label">
+					<posx>212</posx>
+					<posy>15</posy>
+					<width>627</width>
+					<height>67</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font32</font>
+					<aligny>top</aligny>
+					<textcolor>white</textcolor>
+					<scroll>false</scroll>
+				</control>
+				<control type="label">
+					<posx>212</posx>
+					<posy>75</posy>
+					<label>$INFO[ListItem.Date]</label>
+					<font>font23</font>
+					<aligny>top</aligny>
+					<textcolor>FF282828</textcolor>
+					<scroll>false</scroll>
+				</control>
+			</itemlayout>
+			<focusedlayout width="826" height="130">
+				<control type="image">
+					<posx>0</posx>
+					<posy>-1</posy>
+					<width>826</width>
+					<height>131</height>
+					<texture>list-active.png</texture>
+				</control>
+				<control type="image">
+					<posx>15</posx>
+					<posy>20</posy>
+					<width>160</width>
+					<height>90</height>
+					<info>ListItem.Icon</info>
+				</control>
+				<control type="label">
+					<posx>212</posx>
+					<posy>15</posy>
+					<width>627</width>
+					<height>67</height>
+					<label>$INFO[ListItem.Label]</label>
+					<font>font32</font>
+					<aligny>top</aligny>
+					<textcolor>white</textcolor>
+					<scroll>true</scroll>
+				</control>
+				<control type="label">
+					<posx>212</posx>
+					<posy>75</posy>
+					<label>$INFO[ListItem.Date]</label>
+					<font>font23</font>
+					<aligny>top</aligny>
+					<textcolor>FF282828</textcolor>
+					<scroll>false</scroll>
+				</control>
+			</focusedlayout>
+		</control>
+		<control type="group">
+			<visible>Container(120).isLoading</visible>
+			<control type="multiimage">
+				<animation effect="fade" time="100">VisibleChange</animation>
+				<include>Loading_Animation</include>
+			</control>
+			<control type="label">
+				<animation effect="fade" time="100">VisibleChange</animation>
+				<visible>false</visible>
+				<posx>540</posx>
+				<posy>320</posy>
+				<width>200</width>
+				<height>20</height>
+				<align>center</align>
+				<aligny>center</aligny>
+				<font>title18b</font>
+				<textcolor>title</textcolor>
+				<label>54020</label>
+			</control>
+		</control>
+	</controls>
+</window>
